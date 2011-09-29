@@ -118,7 +118,7 @@ EOS
   runStep 'echo "my conf" > conf' "Creating a file called conf.."
   runStep 'git add conf ; git commit -m "added conf file"' "This commit will be our common starting point for all tests.."
   runStep 'git log --oneline --decorate' "Here is our first commit on the master branch.."
-  runStep 'git ls-tree -rt $(git rev-parse master)' "It contains the following objects in it's tree.."
+  runStep 'git ls-tree -rt master' "It contains the following objects in it's tree.."
 }
 
 # Cleanup
@@ -155,7 +155,7 @@ EOS
   runStep 'git merge baseline_right' "Now we merge the right branch.."
   runStep 'git log --graph' "..and the result is a nice clean merge"
   runStep 'git show --format=raw' "Note the head of our left branch has two parents as you would expect:"
-  runStep 'git ls-tree -rt $(git rev-parse baseline_left)' "And it contains the two files and one tree object as expected:"
+  runStep 'git ls-tree -rt baseline_left' "And it contains the two files and one tree object as expected:"
 }
 
 # Break a merge with the fatal: git write-tree failed to write a tree
@@ -189,12 +189,12 @@ EOS
   runStep 'git commit -m "fatal_left: Merged branch '\''fatal_right'\'' into fatal_left"' "And commit the fixed merge"
   runStep 'git log --graph' "..but now we've fallen off the other branch"
   runStep 'git show --format=raw' "Note the head of our left branch only has one parent now:"
-  runStep 'git ls-tree -rt $(git rev-parse fatal_left)' "But it contains the two files and one tree object as expected:"
+  runStep 'git ls-tree -rt fatal_left' "But it contains the two files and one tree object as expected:"
 
   runStep 'git merge fatal_right' "Simple way to fixup the parentage is to merge again:"
   runStep 'git log --graph' "..now are branches are back in correct relation to one another (but we have two merge commits, and one with only a single parent)"
   runStep 'git show --format=raw' "Note the head of our left branch now has two parents as you would expect:"
-  runStep 'git ls-tree -rt $(git rev-parse fatal_left)' "And it contains the two files and one tree object as expected:"
+  runStep 'git ls-tree -rt fatal_left' "And it contains the two files and one tree object as expected:"
 
   cat <<EOS
 
@@ -217,7 +217,7 @@ ${COL_YELLOW}#
 EOS
   runStep 'git log --graph' "..now the history of fatal_left_clean is nicely in order"
   runStep 'git show --format=raw' "Note the head of fatal_left_clean has two parents as you would expect:"
-  runStep 'git ls-tree -rt $(git rev-parse fatal_left)' "And it contains the two files and one tree object as expected:"
+  runStep 'git ls-tree -rt fatal_left' "And it contains the two files and one tree object as expected:"
 
 }
 

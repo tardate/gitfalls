@@ -29,7 +29,7 @@ Catalogue
     This explores the issue and explains one cause of a merge that ends up losing a parent
     (having a file on one branch that has the same name as a folder on another branch)
 
-2. (fill in you favourite here)
+Ok, so it's currently a catalgue of "1"! Looking for more to fill this space ;-)
 
 References
 ----------
